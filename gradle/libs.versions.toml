@@ -8,6 +8,15 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.04.01"
+#---------------------------------------------------------------------------------------------------
+hilt = "2.52"
+hilt-navigation-compose = "1.2.0"
+retrofit = "2.9.0"
+gson = "2.10.1"
+coil = "2.4.0"
+lifecycle-runtime-compose = "2.8.7"
+playServicesContextmanager = "9.4.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,8 +33,22 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+#---------------------------------------------------------------------------------------------------
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
+play-services-contextmanager = { group = "com.google.android.gms", name = "play-services-contextmanager", version.ref = "playServicesContextmanager" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+#--------------------------------------------------------------------------------------------------
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
