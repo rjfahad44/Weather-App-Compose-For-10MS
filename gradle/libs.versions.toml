@@ -11,6 +11,7 @@ composeBom = "2024.04.01"
 #---------------------------------------------------------------------------------------------------
 hilt = "2.52"
 hilt-navigation-compose = "1.2.0"
+playServicesLocation = "21.3.0"
 retrofit = "2.9.0"
 gson = "2.10.1"
 coil = "2.4.0"
@@ -43,6 +44,7 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 play-services-contextmanager = { group = "com.google.android.gms", name = "play-services-contextmanager", version.ref = "playServicesContextmanager" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 
 
 [plugins]

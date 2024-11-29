@@ -5,5 +5,5 @@ import com.nexttel.weather_app_compose_for_10ms.utils.ApiResponse
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
-    fun getWeatherForecastData(placeName: String): Flow<ApiResponse<Weather>>
+    fun getWeatherForecastData(location: String): Flow<ApiResponse<Weather>>
 }

@@ -17,10 +17,10 @@ class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi
 ): WeatherRepository {
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-    override fun getWeatherForecastData(placeName: String) = flow {
+    override fun getWeatherForecastData(location: String) = flow {
         emit(ApiResponse.Loading)
         try {
-            val result = weatherApi.getWeatherForecastData(placeName = placeName).toWeather()
+            val result = weatherApi.getWeatherForecastData(location = location).toWeather()
             emit(ApiResponse.Success(result))
         } catch (exception: HttpException) {
             emit(ApiResponse.Error(exception.message.orEmpty()))

@@ -81,4 +81,5 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.coil)
     implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.play.services.location)
 }

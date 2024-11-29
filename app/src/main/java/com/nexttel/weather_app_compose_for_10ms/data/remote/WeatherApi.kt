@@ -11,7 +11,7 @@ interface WeatherApi {
     @GET("forecast.json")
     suspend fun getWeatherForecastData(
         @Query("key") key: String = API_KEY,
-        @Query("q") placeName: String = DEFAULT_WEATHER_DESTINATION,
+        @Query("q") location: String = DEFAULT_WEATHER_DESTINATION,
         @Query("days") days: Int = NUMBER_OF_DAYS,
     ): ForecastResponse
 }
