@@ -3,4 +3,5 @@
 [//]: # (https://github.com/rjfahad44/Weather-App-Compose-For-10MS.git/app/release/app-release.apk)
 
 # Demo-APK:
-https://github.com/rjfahad44/Weather-App-Compose-For-10MS.git/app/release/app-release.apk
+
+https://github.com/rjfahad44/Weather-App-Compose-For-10MS/tree/main/app/release/app-release.apk
