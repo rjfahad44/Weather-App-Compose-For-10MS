@@ -35,6 +35,12 @@ class WeatherViewModel @Inject constructor(
 //        getWeather()
 //    }
 
+    private val _locationPermissionState: MutableState<Boolean> = mutableStateOf(value = false)
+    val locationPermissionState: State<Boolean> = _locationPermissionState
+    fun updateLocationPermissionState(newValue: Boolean) {
+        _locationPermissionState.value = newValue
+    }
+
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
     private val _location = MutableStateFlow<Pair<String, Boolean>>(value = Pair("", false))
     val location: StateFlow<Pair<String, Boolean>> = _location.asStateFlow()
@@ -71,7 +77,7 @@ class WeatherViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<WeatherUiState> = MutableStateFlow(WeatherUiState(isLoading = true))
     val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
 
-    fun getWeather(location: String = "23.8041,90.4152") {
+    fun getWeather(location: String = if (!_location.value.second) "23.8041,90.4152" else _location.value.first) {
         weatherRepository.getWeatherForecastData(location = location).map { result ->
             when (result) {
                 is ApiResponse.Success -> {

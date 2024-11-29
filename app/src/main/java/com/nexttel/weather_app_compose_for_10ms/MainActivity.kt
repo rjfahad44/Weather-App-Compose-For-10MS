@@ -1,20 +1,25 @@
 package com.nexttel.weather_app_compose_for_10ms
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import com.nexttel.weather_app_compose_for_10ms.ui.features.MainScreen
+import com.nexttel.weather_app_compose_for_10ms.ui.theme.SkyBlue
 import com.nexttel.weather_app_compose_for_10ms.ui.theme.WeatherAppComposeFor10MSTheme
 import com.nexttel.weather_app_compose_for_10ms.ui.viewmodel.WeatherViewModel
 import com.nexttel.weather_app_compose_for_10ms.utils.toast
@@ -27,52 +32,65 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
+
+//        window?.let {
+//            it.statusBarColor = SkyBlue.toArgb()
+//            val controller = WindowInsetsControllerCompat(it, it.decorView)
+//            controller.isAppearanceLightStatusBars = false
+//        }
+
         setContent {
+            val context = LocalContext.current
+
+            val permissionLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.RequestMultiplePermissions()
+            ) { permissions ->
+                val fineGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+                val coarseGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+
+                if (fineGranted || coarseGranted) {
+                    viewModel.updateLocationPermissionState(true)
+                    viewModel.fetchLocation()
+                } else {
+                    viewModel.updateLocationPermissionState(false)
+                    toast("Location permission denied")
+                }
+            }
+
+            LaunchedEffect(Unit) {
+                requestForLocationPermission(context, permissionLauncher)
+            }
+
             WeatherAppComposeFor10MSTheme {
-
-                //viewModel.getWeather()
-                val uiState = viewModel.uiState.collectAsState()
-                val context = LocalContext.current
-                val location by viewModel.location.collectAsState(Pair("Fetching location...", false))
-
-                val permissionLauncher = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.RequestMultiplePermissions()
-                ) { permissions ->
-                    val fineGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
-                    val coarseGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
-
-                    if (fineGranted || coarseGranted) {
-                        viewModel.fetchLocation()
-                    } else {
-                        toast("Location permission denied")
-                    }
+                MainScreen(viewModel = viewModel){
+                    requestForLocationPermission(context, permissionLauncher)
                 }
+            }
+        }
+    }
 
-                LaunchedEffect(Unit) {
-                    when {
-                        ContextCompat.checkSelfPermission(
-                            context,
-                            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                                ContextCompat.checkSelfPermission(
-                                    context,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
-                            viewModel.fetchLocation()
-                        }
+    private fun requestForLocationPermission(
+        context: Context,
+        permissionLauncher: ManagedActivityResultLauncher<Array<String>, Map<String, @JvmSuppressWildcards Boolean>>
+    ) {
+        when {
+            ContextCompat.checkSelfPermission(
+                context, Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                context, Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                viewModel.updateLocationPermissionState(true)
+                viewModel.fetchLocation()
+            }
 
-                        else -> {
-                            permissionLauncher.launch(
-                                arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION
-                                )
-                            )
-                        }
-                    }
-                }
-
-                Log.d("fahad007", "${uiState.value}")
-                Log.d("fahad007", "location : ${location.first}")
+            else -> {
+                permissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
             }
         }
     }

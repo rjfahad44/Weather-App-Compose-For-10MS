@@ -17,6 +17,7 @@ gson = "2.10.1"
 coil = "2.4.0"
 lifecycle-runtime-compose = "2.8.7"
 playServicesContextmanager = "9.4.0"
+accompanistSystemuicontroller = "0.27.0"
 
 
 [libraries]
@@ -45,6 +46,7 @@ coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 play-services-contextmanager = { group = "com.google.android.gms", name = "play-services-contextmanager", version.ref = "playServicesContextmanager" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 
 
 [plugins]

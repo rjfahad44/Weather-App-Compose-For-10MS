@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">Weather-App-Compose-For-10MS</string>
+    <string name="app_name">Weather-App</string>
+    <string name="content_description">ContentDescription</string>
+    <string name="search_hint">Search city..</string>
+    <string name="retry">retry</string>
+    <string name="request_Permission">Request Permission</string>
+    <string name="icon_image_url">https:%1$s</string>
+    <string name="temperature_value_in_celsius">%1$s°</string>
+    <string name="feels_like_temperature_in_celsius">Feels like %1$s°C</string>
+    <string name="wind_speed_label">wind speed</string>
+    <string name="wind_speed_unit">km/h</string>
+    <string name="uv_index_label">uv</string>
+    <string name="uv_unit">index</string>
+    <string name="humidity_label">humidity</string>
+    <string name="humidity_unit">percentage %</string>
+    <string name="today">Today</string>
+    <string name="forecast">Forecast</string>
+
+
 </resources>

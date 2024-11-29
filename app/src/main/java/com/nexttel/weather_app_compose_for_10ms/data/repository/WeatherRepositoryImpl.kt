@@ -14,9 +14,9 @@ import java.io.IOException
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
-    private val weatherApi: WeatherApi
-): WeatherRepository {
+    private val weatherApi: WeatherApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+): WeatherRepository {
     override fun getWeatherForecastData(location: String) = flow {
         emit(ApiResponse.Loading)
         try {
