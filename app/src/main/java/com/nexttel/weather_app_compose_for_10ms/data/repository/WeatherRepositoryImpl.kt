@@ -9,13 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): WeatherRepository {
     override fun getWeatherForecastData(location: String) = flow {
         emit(ApiResponse.Loading)
@@ -27,6 +27,6 @@ class WeatherRepositoryImpl @Inject constructor(
         } catch (exception: IOException) {
             emit(ApiResponse.Error("Please check your network connection and try again!"))
         }
-    }.flowOn(dispatcher)
+    }.flowOn(Dispatchers.IO)
 
 }

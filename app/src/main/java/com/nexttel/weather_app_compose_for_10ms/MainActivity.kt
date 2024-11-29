@@ -3,7 +3,6 @@ package com.nexttel.weather_app_compose_for_10ms
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -11,15 +10,11 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.core.content.ContextCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.nexttel.weather_app_compose_for_10ms.ui.features.MainScreen
-import com.nexttel.weather_app_compose_for_10ms.ui.theme.SkyBlue
 import com.nexttel.weather_app_compose_for_10ms.ui.theme.WeatherAppComposeFor10MSTheme
 import com.nexttel.weather_app_compose_for_10ms.ui.viewmodel.WeatherViewModel
 import com.nexttel.weather_app_compose_for_10ms.utils.toast
@@ -63,7 +58,7 @@ class MainActivity : ComponentActivity() {
             }
 
             WeatherAppComposeFor10MSTheme {
-                MainScreen(viewModel = viewModel){
+                MainScreen{
                     requestForLocationPermission(context, permissionLauncher)
                 }
             }

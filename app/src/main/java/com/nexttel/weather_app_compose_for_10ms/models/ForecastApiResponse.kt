@@ -1,12 +1,15 @@
 package com.nexttel.weather_app_compose_for_10ms.models
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class ForecastResponse(
     @SerializedName("current") val current: Current,
     @SerializedName("forecast") val forecast: NetworkForecast,
     @SerializedName("location") val location: Location
 ) {
+    @Keep
     data class Current(
         @SerializedName("cloud") val cloud: Int,
         @SerializedName("condition") val condition: Condition,
@@ -32,6 +35,7 @@ data class ForecastResponse(
         @SerializedName("wind_kph") val windKph: Double,
         @SerializedName("wind_mph") val windMph: Double
     ) {
+        @Keep
         data class Condition(
             @SerializedName("code") val code: Int,
             @SerializedName("icon") val icon: String,
@@ -39,9 +43,11 @@ data class ForecastResponse(
         )
     }
 
+    @Keep
     data class NetworkForecast(
         @SerializedName("forecastday") val forecastday: List<NetworkForecastday>
     ) {
+        @Keep
         data class NetworkForecastday(
             @SerializedName("astro") val astro: Astro,
             @SerializedName("date") val date: String,
@@ -49,6 +55,7 @@ data class ForecastResponse(
             @SerializedName("day") val day: Day,
             @SerializedName("hour") val hour: List<NetworkHour>
         ) {
+            @Keep
             data class Astro(
                 @SerializedName("is_moon_up") val isMoonUp: Int,
                 @SerializedName("is_sun_up") val isSunUp: Int,
@@ -60,6 +67,7 @@ data class ForecastResponse(
                 @SerializedName("sunset") val sunset: String
             )
 
+            @Keep
             data class Day(
                 @SerializedName("avghumidity") val avghumidity: Double,
                 @SerializedName("avgtemp_c") val avgtempC: Double,
@@ -82,6 +90,7 @@ data class ForecastResponse(
                 @SerializedName("totalsnow_cm") val totalsnowCm: Double,
                 @SerializedName("uv") val uv: Double
             ) {
+                @Keep
                 data class Condition(
                     @SerializedName("code") val code: Int,
                     @SerializedName("icon") val icon: String,
@@ -89,6 +98,7 @@ data class ForecastResponse(
                 )
             }
 
+            @Keep
             data class NetworkHour(
                 @SerializedName("chance_of_rain") val chanceOfRain: Int,
                 @SerializedName("chance_of_snow") val chanceOfSnow: Int,
@@ -124,6 +134,7 @@ data class ForecastResponse(
                 @SerializedName("windchill_c") val windchillC: Double,
                 @SerializedName("windchill_f") val windchillF: Double
             ) {
+                @Keep
                 data class Condition(
                     @SerializedName("code") val code: Int,
                     @SerializedName("icon") val icon: String,
@@ -133,6 +144,7 @@ data class ForecastResponse(
         }
     }
 
+    @Keep
     data class Location(
         @SerializedName("country") val country: String,
         @SerializedName("lat") val lat: Double,
@@ -146,7 +158,7 @@ data class ForecastResponse(
 }
 
 fun ForecastResponse.toWeather(): Weather = Weather(temperature = current.tempC.toInt(),
-    date = forecast.forecastday[0].date,
+    date = forecast.forecastday.firstOrNull()?.date?:"",
     wind = current.windKph.toInt(),
     humidity = current.humidity,
     feelsLike = current.feelslikeC.toInt(),
