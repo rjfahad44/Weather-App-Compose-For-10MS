@@ -12,33 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-//
-//val LightColorScheme = lightColorScheme(
-//    primary = SkyBlue,
-//    secondary = SunshineYellow,
-//    background = WhiteSmoke,
-//    surface = LightGrey,
-//    error = StormRed,
-//    onPrimary = WhiteSmoke,
-//    onSecondary = DarkGrey,
-//    onBackground = DarkGrey,
-//    onSurface = DeepBlue,
-//    onError = WhiteSmoke,
-//)
-//
-//val DarkColorScheme = darkColorScheme(
-//    primary = DeepBlue,
-//    secondary = SunsetOrange,
-//    background = DarkGrey,
-//    surface = RainyBlue,
-//    error = StormRed,
-//    onPrimary = LightGrey,
-//    onSecondary = WhiteSmoke,
-//    onBackground = WhiteSmoke,
-//    onSurface = CloudyWhite,
-//    onError = WhiteSmoke
-//)
-
 val LightColorScheme = lightColorScheme(
     primary = SkyBlue,
     secondary = SunshineYellow,
